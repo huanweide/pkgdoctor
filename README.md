@@ -5,6 +5,7 @@
 <!-- /badges -->
 
 # pkgdoctor
+> **English** · [README_EN.md](./README_EN.md)
 
 零依赖单文件 `package.json` 配置卫生体检 CLI。
 
