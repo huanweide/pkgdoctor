@@ -1,8 +1,19 @@
+<!-- badges -->
+[![Node](https://img.shields.io/badge/Node.js-≥14-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Zero-Deps](https://img.shields.io/badge/dependencies-zero-0f9d58?logo=npm&logoColor=white)](https://www.npmjs.com/)
+[![License](https://img.shields.io/github/license/huanweide/pkgdoctor)](LICENSE)
+<!-- /badges -->
+
 # pkgdoctor
 
 零依赖单文件 `package.json` 配置卫生体检 CLI。
 
 扫你项目自身 `package.json` 的**元数据坏味道**和**依赖声明规范**，给出 `0-100` 健康分与可进 CI 的退出码门禁。纯本地只读、不联网、不调 git、不执行你的代码，单文件零依赖、开箱即跑、确定性可复现。
+
+## 谁该用 / 谁先别用
+
+- **该用**：发布到 npm 的公共包维护者；接手老仓库、想快速给 `package.json` 做一次配置体检的人；想在 CI 里加一道「配置规范门禁」的团队。
+- **先别用**：纯前端单页应用且从不发 npm 包、对 `license` / `engines` 无所谓的项目；已有完整 Renovate + 严格发布流程且零容忍偏离的团队（它仍可作独立校验，但收益有限）。
 
 ## 为什么需要它
 
@@ -14,7 +25,7 @@
 - `depcheck` 查**死依赖**，需安装；
 - `devdoctor` 查**依赖胖瘦（bloat）+ 依赖 license + cycles + 明文密钥**（运行态/源码态）；
 - `licguard` 查 **node_modules 里每个包的 license**（别人的）；
-- `repodoctor` 查**仓库工程卫生**（含"有 package.json 无锁文件"）；
+- `repodoctor` 查**仓库工程卫生**（含「有 package.json 无锁文件」）；
 
 `pkgdoctor` 补上它们都没覆盖的一块：**项目自身 `package.json` 的配置规范层**——你是谁（name/author/repository）、发版合规（license/version）、可复现（依赖范围规范/锁文件版本）、可验证（test 脚本）、可发现（description/keywords/type）。正交不重叠。
 
@@ -74,15 +85,15 @@ pkgdoctor [目录或 package.json 路径] [选项]
 | LOW | `missing-keywords` | 缺少 `keywords`（不利 npm 发现） |
 | LOW | `lockfile-outdated` | `package-lock.json` 的 `lockfileVersion` 过旧（< 2） |
 
-> 模糊范围豁免：`workspace:*`（monorepo 别名）、`file:` / `link:` / `git+https:` / `npm:` 等非 npm registry 依赖不会被误报。
+> 模糊范围豁免：`workspace:*`、`file:` / `link:` / `git+https:` / `npm:` 等非 npm registry 依赖不会被误报。
 
 ## 健康分
 
 满分 `100`，按问题当量扣分并封底 `0`：
 
-- HIGH 每项 `-12`
-- MEDIUM 每项 `-6`
-- LOW 每项 `-3`
+- HIGH 每项 −12
+- MEDIUM 每项 −6
+- LOW 每项 −3
 
 等级：`A`(≥90) `B`(≥75) `C`(≥60) `D`(≥40) `E`(<40)。
 
@@ -126,6 +137,14 @@ pkgdoctor . --fail-on-high --max-medium 0
 - [repodoctor](https://github.com/huanweide/repodoctor)（仓库工程卫生）
 - 源码层八件套（testlite / debtlens / a11ydoctor / awaitscan / cycscan / secscan / dupscan / typedoctor）
 - git 层四件套（docdoctor / commitdoctor / reldoctor / repodoctor）
+
+## ⭐ 给个 Star
+
+如果 pkgdoctor 帮你拦住过一次「漏了 license / 版本漂移」的发布事故，欢迎点个 Star ⭐ 让更多人发现：https://github.com/huanweide/pkgdoctor
+
+## 作者
+
+由 [huanweide](https://github.com/huanweide) 维护。
 
 ## License
 
